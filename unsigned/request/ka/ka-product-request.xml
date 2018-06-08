@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <ProductsVerificationRequest>
+    <ProductsVerified id="products">
+        <RequestedDateTime>2017-01-03T09:30:10+11:00</RequestedDateTime>
+        <Products>
+            <Product>
+                <SerialNumber>10101180065</SerialNumber>
+                <ModelNumber>6MN48145</ModelNumber>
+                <Manufacturer>AblyTek Co Ltd</Manufacturer>
+                <ResponsibleSupplier>Importers R US Co Ltd</ResponsibleSupplier> 
+            </Product>
+            <Product>
+                <SerialNumber>10101180157</SerialNumber>
+                <ModelNumber>6MN48145</ModelNumber>
+                <Manufacturer>AblyTek Co Ltd</Manufacturer>
+                <ResponsibleSupplier>Importers R US Co Ltd</ResponsibleSupplier>
+            </Product>
+        </Products>
+        <Requestor>
+            <Name>Bobs Solar</Name>
+            <ABN>12 345 678 901</ABN>
+        </Requestor>
+    </ProductsVerified>
+</ProductsVerificationRequest>
