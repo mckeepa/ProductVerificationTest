@@ -10,7 +10,7 @@ var select = require('xml-crypto').xpath,
 function sign(dir, file, type) {
   return new Promise((resolve, reject) => {
     try {
-      log("Signing [" + dir + "/" + file + "]")
+      //log("Signing [" + dir + "/" + file + "]")
       var xml = removeFormattingIfRequired(fs.readFileSync(dir + "/" + file, 'utf-8'));
       var sig = new SignedXml()
       addReferenceToSignature(sig, type)
@@ -40,10 +40,10 @@ function verify(file, cert) {
     if (!res) {
       console.error("ERROR [" + file + "]" + sig.validationErrors);
     } else {
-      log("SUCCESS " + res);
+      log("SUCCESS [" + file + "]");
     }
   } catch(err) {
-    console.error("ERROR : " + err)
+    console.error("ERROR [" + file + "] : " + err)
   }
 }
 
@@ -82,20 +82,36 @@ function MyKeyInfo() {
 
 
 function signAndVerifyFilesInDirectory(dir) {
-  log("Reading directory [" + dir + "]")
+  //log("Reading directory [" + dir + "]")
   createSignedDirectoryIfItDoesNotExist(dir)
   var files = fs.readdirSync(dir);
   files.forEach(file => {
     if (fs.statSync(dir + '/' + file).isDirectory()) {
       signAndVerifyFilesInDirectory(dir + '/' + file);
     } else {
-      log("Processing file [" + dir + "/" + file + "]");
+      //log("Processing file [" + dir + "/" + file + "]");
       sign(dir, file, 'product').then((signedFile) => {
         verify(signedFile)
       })
     }
   });
 };
+
+function VerifyFilesInDirectory(dir) {
+  //log("Reading directory [" + dir + "]")
+  createSignedDirectoryIfItDoesNotExist(dir)
+  var files = fs.readdirSync(dir);
+  files.forEach(file => {
+    if (fs.statSync(dir + '/' + file).isDirectory()) {
+      VerifyFilesInDirectory(dir + '/' + file);
+    } else {
+      //log("Processing file [" + dir + "/" + file + "]");
+      verify(dir + '/' + file);
+
+    }
+  });
+};
+
 
 function createSignedDirectoryIfItDoesNotExist(dir) {
   var udir = dir.replace('unsigned', 'signed')
@@ -128,4 +144,20 @@ function log(msg) {
   }
 }
 
+function UseCommandArguments() {
+  // Arguments are in the format  " debug:true  "
+  process.argv.forEach(function (val, index, array) {
+    var arg = val.split(':');
+    
+    if(arg[0].toUpperCase()=="DEBUG" ) {
+      if (arg[1].toUpperCase()=="TRUE") { DEBUG = true}
+      else DEBUG =false;
+      console.log("DEBUG: " + DEBUG )
+    };
+  });
+
+}
+
+UseCommandArguments();
 signAndVerifyFilesInDirectory('./unsigned');
+VerifyFilesInDirectory('./signed');

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><ProductsVerificationRequest>
+    <ProductsVerified id="products">
+        <RequestedDateTime>2017-01-03T09:30:10+11:00</RequestedDateTime>
+        <Products>
+            <Product>
+                <SerialNumber>10101180065</SerialNumber>
+                <ModelNumber>6MN48145</ModelNumber>
+                <Manufacturer>AblyTek Co Ltd</Manufacturer>
+                <ResponsibleSupplier>Importers R US Co Ltd</ResponsibleSupplier> 
+            </Product>
+            <Product>
+                <SerialNumber>10101180157</SerialNumber>
+                <ModelNumber>6MN48145</ModelNumber>
+                <Manufacturer>AblyTek Co Ltd</Manufacturer>
+                <ResponsibleSupplier>Importers R US Co Ltd</ResponsibleSupplier>
+            </Product>
+        </Products>
+        <Requestor>
+            <Name>Bobs Solar</Name>
+            <ABN>12 345 678 901</ABN>
+        </Requestor>
+    </ProductsVerified>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#products"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>zKcxJIhGYJkohpUMc/K/v2Aldnw=</DigestValue></Reference></SignedInfo><SignatureValue>gWtWfmNGtvn2vkYljTwKrR/7vKsePBFPER42KZ4i1A+piauj1yY15nVYz10sdyLbKnWNYPenEABB58cVtHCCCXDt7iVtHbM3mg0T6fBrAg75hGm66eUf8xhBDtlXzAezaVIDoM/OQaPsD0YtSkKGac+F7mdM3yA1TZzLWfuUE8lM6uByxqinE//mEPpTAOSbSbZmV0Qgma4Npjx/fettwJFj8QlRClj0NamVybenoTPFTpoaaafnKS2SL7BH2VQaW++wmxABHlhKT1oUbgZXkqaDdFu1sGF0msDWdREUSzpxhHj0bqASg/MCi4wfSMq1kIoy37SJ6yZAiz9BwmieP3v5Y2aHfaKb1+jIjJV74U/KteDZuBa/c4dt3OyN3nw4znTCm7aGwD4WgjWKksyluMqIBRD00ydnNSlyVBB9xAfc6cOePhiWaR1NwYn4w7G+JtpzGCQkwz6+5tC53ef+W4634KOf0i9KZoxDmlHXVx979MvQI+sEGrhmneZIjsUfhtqICWA8PVW3h+Juqij46gPA1hbZzWdQh1rPwHSrjFuupjrt/4SocXXzhRo1fdXNF2difJYondTvDbg4G126z/0fng1u68o2JaT/jCzTB4P5jgU5kuqNjj3pyJq8IwfUKJyQskDo5sLB8gTiL5aq622B/SYcJQkIl0qSDwIx1kg=</SignatureValue><KeyInfo><X509Data>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</X509Data></KeyInfo></Signature></ProductsVerificationRequest>
