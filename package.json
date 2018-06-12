@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "node-forge": "^0.7.5",
+    "request": "^2.87.0",
     "xml-crypto": "0.9.0",
     "xmldom": "^0.1.27"
   }

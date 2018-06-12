@@ -3,7 +3,8 @@ var select = require('xml-crypto').xpath,
         SignedXml = require('xml-crypto').SignedXml, 
         FileKeyInfo = require('xml-crypto').FileKeyInfo, 
         fs = require('fs'),
-        forge = require('node-forge')
+        forge = require('node-forge'),
+        httpRequest = require('request'),
         DEBUG = false, FAIL = false, NOFORMATTING = false;
 
 
@@ -72,7 +73,7 @@ function MyKeyInfo() {
       prefix = prefix || ''
       prefix = prefix ? prefix + ':' : prefix;
       var rawX509 = fs.readFileSync("certs/test-private/serialnumber-raw.pem", "utf8");
-    return "<" + prefix + "X509Data>"+ rawX509 +"</" + prefix + "X509Data>"
+    return `<X509Data><X509IssuerSerial><X509SerialNumber>14581315030856604079</X509SerialNumber></X509IssuerSerial><X509Certificate>`+rawX509+`</X509Certificate></X509Data>`
   }
   this.getKey = function(keyInfo) {
     //you can use the keyInfo parameter to extract the key in any way you want      
@@ -144,6 +145,24 @@ function log(msg) {
   }
 }
 
+function query(url, payload) {
+  console.log("\n\ninvoking endpoint " + url + " with payload \n" + payload)
+  console.log("\n\nwaiting for response from service....")
+  return new Promise((resolve, reject) => {
+      httpRequest({
+          url: url,
+          method: "POST",
+          headers: {
+              "content-type": "application/xml",  // <--Very important!!!
+          },
+          body: payload
+      }, function (error, response, body){
+          console.log("\n\n"+body);
+          resolve(body);
+      });
+  })
+}
+
 function UseCommandArguments() {
   // Arguments are in the format  " debug:true  "
   process.argv.forEach(function (val, index, array) {
@@ -161,3 +180,9 @@ function UseCommandArguments() {
 UseCommandArguments();
 signAndVerifyFilesInDirectory('./unsigned');
 VerifyFilesInDirectory('./signed');
+
+//this is how to query. you can use this in whatever context you need. I've used a sample request to query our service
+//Product verification
+var testServiceUrl = 'https://ky2c059sge.execute-api.ap-southeast-2.amazonaws.com/test/';
+
+query(testServiceUrl + 'verify-product', fs.readFileSync('./signed/request/ka/ka-product-request.xml', 'utf8'));
